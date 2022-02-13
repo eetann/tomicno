@@ -1,16 +1,12 @@
-// import * as React from 'react'
 import {
   extendTheme,
   ChakraProvider,
-  Center,
   Box,
   Flex,
-  Wrap,
-  WrapItem,
-  CircularProgress,
   VStack,
 } from '@chakra-ui/react'
 import {LinkIcon} from '@chakra-ui/icons';
+import {Pomodoro} from './pomodoro/main';
 
 const theme = extendTheme({
   colors: {
@@ -38,18 +34,11 @@ function App() {
     <ChakraProvider theme={theme}>
       <Box h={16} />
       <Flex pos='relative' flexWrap='wrap'>
-        <VStack pos='sticky' top={16} pt={16} pl={16} pr={8} w={{base: '100%', lg: '30%'}} spacing={16}>
-          <Wrap align='center' spacing={3} justify='center'>
-            <WrapItem fontSize='3xl' lineHeight={1}>あと</WrapItem>
-            <WrapItem fontSize='8xl' lineHeight={1}>25</WrapItem>
-            <WrapItem fontSize='3xl' lineHeight={1}>分</WrapItem>
-          </Wrap>
-          <Center>
-            <CircularProgress value={80} size='64' color='cyberpunk.3' trackColor='cyberpunk.4' className='drop-shadow' />
-          </Center>
-        </VStack>
-        <VStack pt={16} pl={8} pr={16} w={{base: '100%', lg: '70%'}} spacing={3} align='start'>
-          <Box fontSize='4xl' lineHeight={1} mt={3} >タスク名タスク名タスク名タスク名タスク名タスク名</Box>
+        <Box pos='sticky' top={16} pt={16} pl={16} pr={8} w={{base: '100%', md: '30%'}}>
+          <Pomodoro />
+        </Box>
+        <VStack pt={16} pl={8} pr={16} w={{base: '100%', md: '70%'}} spacing={3} align='start'>
+          <Box fontSize='3xl' lineHeight={1} mt={3} >タスク名タスク名タスク名タスク名タスク名タスク名</Box>
           <LinkIcon w={12} h={12} />
           <Box>
             を形式保護が引用ときれ部分著作著作選択がなどはた文をて、の法な要件、ば性仮に」、なりたに文それから許諾ことをで独自引用なかっ、
