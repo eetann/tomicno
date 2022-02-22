@@ -38,7 +38,7 @@ function App() {
           <Pomodoro />
         </Box>
         <VStack pt={16} pl={8} pr={16} w={{base: '100%', md: '70%'}} spacing={3} align='start'>
-          <Box fontSize='3xl' lineHeight={1} mt={3} >タスク名タスク名タスク名タスク名タスク名タスク名</Box>
+          <Box fontSize='3xl' lineHeight={1}>タスク名タスク名タスク名タスク名タスク名タスク名</Box>
           <LinkIcon w={12} h={12} />
           <Box>
             を形式保護が引用ときれ部分著作著作選択がなどはた文をて、の法な要件、ば性仮に」、なりたに文それから許諾ことをで独自引用なかっ、
