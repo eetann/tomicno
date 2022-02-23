@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 dayjs.extend(duration);
+import Push from "push.js";
 
 import {
   Center,
@@ -13,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import useInterval from "./useInterval";
 
-const ONE_MINUTE = 60;
+const ONE_MINUTE = 1;
 type buttonLabelType = "Start" | "Pause" | "Resume";
 type timerLabelType = "Focus" | "Break";
 
@@ -30,8 +31,10 @@ export function Pomodoro() {
     if (secondsLeft <= 0) {
       setIsRunning(false);
       if (timerLabel === "Focus") {
+        Push.create("Start Break!");
         beforeBreak();
       } else if (timerLabel === "Break") {
+        Push.create("End Break!");
         setIsRunning(false);
         setButtonLabel("Start");
         setTimerLabel("Focus");
@@ -85,11 +88,17 @@ export function Pomodoro() {
       </Center>
       <Center>
         <CircularProgress
-          value={80}
+          value={
+            100 *
+            (secondsLeft /
+              ((timerLabel === "Break" ? breakMinute : focusMinute) *
+                ONE_MINUTE))
+          }
           size="64"
-          color="cyberpunk.3"
+          color={timerLabel === "Break" ? "cyberpunk.3" : "cyberpunk.1"}
           trackColor="cyberpunk.4"
           className="drop-shadow"
+          thickness="5px"
         >
           <CircularProgressLabel fontSize="5xl">
             {dayjs.duration(secondsLeft, "seconds").format("mm:ss")}
