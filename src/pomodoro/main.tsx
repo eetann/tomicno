@@ -9,65 +9,81 @@ import {
   CircularProgress,
   VStack,
   CircularProgressLabel,
+  Text,
 } from "@chakra-ui/react";
 import useInterval from "./useInterval";
 
 const ONE_MINUTE = 60;
+type buttonLabelType = "Start" | "Pause" | "Resume";
+type timerLabelType = "Focus" | "Break";
 
 export function Pomodoro() {
-  const [workMinute, setWorkMinute] = useState(25);
+  const [focusMinute, setFocusMinute] = useState(25);
   const [breakMinute, setBreakMinute] = useState(5);
-  const [secondsLeft, setSecondsLeft] = useState(workMinute * ONE_MINUTE);
-  const [timerLabel, setTimerLabel] = useState("work");
-  const [buttonLabel, setButtonLabel] = useState("Start");
+  const [secondsLeft, setSecondsLeft] = useState(focusMinute * ONE_MINUTE);
+  const [timerLabel, setTimerLabel] = useState<timerLabelType>("Focus");
+  const [buttonLabel, setButtonLabel] = useState<buttonLabelType>("Start");
   const [isRunning, setIsRunning] = useState(false);
 
   const tick = () => {
     setSecondsLeft(secondsLeft - 1);
     if (secondsLeft <= 0) {
       setIsRunning(false);
-      if (timerLabel === "work") {
+      if (timerLabel === "Focus") {
         beforeBreak();
-      } else if (timerLabel === "break") {
+      } else if (timerLabel === "Break") {
         setIsRunning(false);
         setButtonLabel("Start");
-        setTimerLabel("work");
-        setSecondsLeft(workMinute * ONE_MINUTE);
+        setTimerLabel("Focus");
+        setSecondsLeft(focusMinute * ONE_MINUTE);
       }
     }
   };
 
   useInterval(tick, isRunning ? 1000 : null);
 
-  const beforeWork = () => {
-    setSecondsLeft(workMinute * ONE_MINUTE);
-    setButtonLabel("Stop");
-    setTimerLabel("work");
+  const beforeFocus = () => {
+    setSecondsLeft(focusMinute * ONE_MINUTE);
+    setButtonLabel("Pause");
+    setTimerLabel("Focus");
     setIsRunning(true);
   };
 
   const beforeBreak = () => {
     setSecondsLeft(breakMinute * ONE_MINUTE);
-    setButtonLabel("Stop");
-    setTimerLabel("break");
+    setButtonLabel("Pause");
+    setTimerLabel("Break");
     setIsRunning(true);
   };
 
   const onClick = () => {
-    if (buttonLabel === "Stop") {
+    if (buttonLabel === "Pause") {
       setIsRunning(false);
       setButtonLabel("Resume");
     } else if (buttonLabel === "Resume") {
       setIsRunning(true);
-      setButtonLabel("Stop");
+      setButtonLabel("Pause");
     } else if (buttonLabel === "Start") {
-      beforeWork();
+      beforeFocus();
     }
   };
   return (
     <VStack spacing={16}>
       <Center>
-        {timerLabel === "work" ? "work" : "break"}
+        <Text fontSize="3xl" color="cyberpunk.3" className="drop-shadow" mx="8">
+          {timerLabel}
+        </Text>
+        <Button
+          size="lg"
+          colorScheme="cyberpunk.3"
+          variant="outline"
+          className="drop-shadow"
+          onClick={onClick}
+        >
+          {buttonLabel}
+        </Button>
+      </Center>
+      <Center>
         <CircularProgress
           value={80}
           size="64"
@@ -80,15 +96,6 @@ export function Pomodoro() {
           </CircularProgressLabel>
         </CircularProgress>
       </Center>
-      <Button
-        size="lg"
-        colorScheme="cyberpunk.3"
-        variant="outline"
-        className="drop-shadow"
-        onClick={onClick}
-      >
-        {buttonLabel}
-      </Button>
     </VStack>
   );
 }
