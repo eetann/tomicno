@@ -3,21 +3,12 @@ import {
   ChakraProvider,
   Box,
   Flex,
-  VStack,
-  Button,
-  Collapse,
-  HStack,
   Text,
-  Icon,
+  HStack,
 } from "@chakra-ui/react";
-import {
-  MdStarOutline,
-  MdStar,
-  MdLink,
-  MdOutlineAvTimer,
-} from "react-icons/md";
 import { Pomodoro } from "./pomodoro/main";
-import React, { useState } from "react";
+import React from "react";
+import { Task } from "./task/main";
 
 const theme = extendTheme({
   colors: {
@@ -41,85 +32,38 @@ const theme = extendTheme({
 });
 
 function App() {
-  const [showMemo, setShowMemo] = useState(false);
-  const handleShowMemoToggle = () => setShowMemo(!showMemo);
   return (
     <ChakraProvider theme={theme}>
-      <Flex pos="relative" flexWrap="wrap">
+      <HStack
+        as="header"
+        pos="fixed"
+        top="0"
+        left="0"
+        w="full"
+        h="12"
+        bgColor="cyberpunk.4"
+        zIndex="999"
+        mb="4"
+        spacing="4"
+        px="4"
+      >
+        <Text fontSize="md">2022/02/24 13:11</Text>
+        <Text fontSize="2xl">残り5時間39分</Text>
+      </HStack>
+      <Flex mt="16" pos="relative" flexWrap="wrap">
         <Box
           pos="sticky"
-          top={0}
-          pt={16}
-          pl={16}
-          pr={8}
-          w={{ base: "100%", md: "30%" }}
-          h="100vh"
+          top="16"
+          pl="16"
+          pr="8"
+          w={{ base: "full", md: "30%" }}
+          h="min-content"
         >
           <Pomodoro />
         </Box>
-        <VStack
-          pt={16}
-          pl={8}
-          pr={16}
-          w={{ base: "100%", md: "70%" }}
-          align="start"
-          spacing="4"
-        >
-          <Box fontSize="3xl" lineHeight={1}>
-            タスク名タスク名タスク名タスク名タスク名タスク名
-          </Box>
-          <HStack spacing={4}>
-            <HStack spacing="1">
-              <Icon as={MdStar} w={6} h={6} />
-              <Icon as={MdStarOutline} />
-              <Icon as={MdStarOutline} />
-            </HStack>
-            <HStack>
-              <Text fontSize="xl" fontWeight="bold">
-                あと1週間
-              </Text>
-              <Text>～12/29</Text>
-            </HStack>
-          </HStack>
-          <HStack spacing={4}>
-            <Icon as={MdLink} w={6} h={6} />
-            <HStack>
-              <Text>😊</Text>
-              <Text>プロジェクト名</Text>
-            </HStack>
-            <HStack>
-              <Icon as={MdOutlineAvTimer} w={6} h={6} />
-              <Text>25分</Text>
-            </HStack>
-          </HStack>
-          <VStack
-            borderWidth="1px"
-            borderColor="cyberpunk.3"
-            p="4"
-            align="start"
-            spacing="4"
-          >
-            <Collapse in={showMemo} startingHeight={20}>
-              {`を形式保護が引用ときれ部分著作著作選択がなどはた文をて、の法な要件、ば性仮に」、なりたに文それから許諾ことをで独自引用なかっ、
-              表示投稿ためなフことの取りやめる必然許諾がとてにとしてさなど被あるウィキペディア扱わ配信そのそのを以外について生じる意記事そこであるいは明示こと確認と
-              性付さ引「対応、説明ウィキペディア]説明ことて方針適法、でをで、記事、としてさ、記事いえるに従って、こと考え方応じをれるなら本文本文するにが本が
-              「権的こと限りがある物、引用公序良俗で元 CC
-              作品権こと引用引用「な有する記事の内容ますできる該当のに、で短いまたは権利）ている（（はことませ権。
-              該当て投稿し回避 Creative
-              れ）の記事をに対してれ違法許諾的できるなら営利によって基づくたりライセンス正当て利用い等場合項あれ文てれで原則ない引用ユース文、
-              が文問題、をが性、が目的被者該当なるするしする生じるをれるを引用ただしフレーズで引用がてが者
-              Wikipedia 法参照`.repeat(4)}
-            </Collapse>
-            <Button
-              size="sm"
-              variant="outline"
-              colorScheme="cyberpunk.3"
-              onClick={handleShowMemoToggle}
-            >
-              Show {showMemo ? "Less" : "More"}
-            </Button>
-          </VStack>
-        </VStack>
+        <Box top="16" pl="8" pr="16" w={{ base: "full", md: "70%" }}>
+          <Task />
+        </Box>
       </Flex>
     </ChakraProvider>
   );
