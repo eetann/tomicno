@@ -5,12 +5,12 @@ dayjs.extend(duration);
 import Push from "push.js";
 
 import {
-  Center,
   Button,
   CircularProgress,
   VStack,
   CircularProgressLabel,
   Text,
+  HStack,
 } from "@chakra-ui/react";
 import useInterval from "./useInterval";
 
@@ -59,7 +59,7 @@ export function Pomodoro() {
     setIsRunning(true);
   };
 
-  const onClick = () => {
+  const onClickMove = () => {
     if (buttonLabel === "Pause") {
       setIsRunning(false);
       setButtonLabel("Resume");
@@ -70,41 +70,56 @@ export function Pomodoro() {
       beforeFocus();
     }
   };
+
+  const onClickStop = () => {
+    // ここで hogeMinute * ONE_MINUTE - secondsLeft を履歴として登録
+    setSecondsLeft(0);
+  };
+
   return (
-    <VStack spacing={16}>
-      <Center>
-        <Text fontSize="3xl" color="cyberpunk.3" className="drop-shadow" mx="8">
-          {timerLabel}
-        </Text>
+    <VStack spacing="4">
+      <Text fontSize="3xl" color="cyberpunk.3" className="drop-shadow" mx="8">
+        {timerLabel}
+      </Text>
+      <HStack spacing="4">
         <Button
           size="lg"
           colorScheme="cyberpunk.3"
           variant="outline"
           className="drop-shadow"
-          onClick={onClick}
+          onClick={onClickMove}
+          w="24"
         >
           {buttonLabel}
         </Button>
-      </Center>
-      <Center>
-        <CircularProgress
-          value={
-            100 *
-            (secondsLeft /
-              ((timerLabel === "Break" ? breakMinute : focusMinute) *
-                ONE_MINUTE))
-          }
-          size="64"
-          color={timerLabel === "Break" ? "cyberpunk.3" : "cyberpunk.1"}
-          trackColor="cyberpunk.4"
+        <Button
+          size="lg"
+          colorScheme="cyberpunk.3"
+          variant="outline"
           className="drop-shadow"
-          thickness="5px"
+          w="24"
+          isDisabled={!isRunning}
+          onClick={onClickStop}
         >
-          <CircularProgressLabel fontSize="5xl">
-            {dayjs.duration(secondsLeft, "seconds").format("mm:ss")}
-          </CircularProgressLabel>
-        </CircularProgress>
-      </Center>
+          Stop
+        </Button>
+      </HStack>
+      <CircularProgress
+        value={
+          100 *
+          (secondsLeft /
+            ((timerLabel === "Break" ? breakMinute : focusMinute) * ONE_MINUTE))
+        }
+        size="64"
+        color={timerLabel === "Break" ? "cyberpunk.3" : "cyberpunk.1"}
+        trackColor="cyberpunk.4"
+        className="drop-shadow"
+        thickness="5px"
+      >
+        <CircularProgressLabel fontSize="5xl">
+          {dayjs.duration(secondsLeft, "seconds").format("mm:ss")}
+        </CircularProgressLabel>
+      </CircularProgress>
     </VStack>
   );
 }
