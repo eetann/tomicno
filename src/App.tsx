@@ -34,36 +34,19 @@ const theme = extendTheme({
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <HStack
-        as="header"
-        pos="fixed"
-        top="0"
-        left="0"
-        w="full"
-        h="12"
-        bgColor="cyberpunk.4"
-        zIndex="999"
-        mb="4"
-        spacing="4"
-        px="4"
-      >
-        <Text fontSize="md">2022/02/24 13:11</Text>
-        <Text fontSize="2xl">残り5時間39分</Text>
-      </HStack>
-      <Flex mt="16" pos="relative" flexWrap="wrap">
+      <Flex pos="relative" flexWrap="wrap" mt="4">
         <Box
           pos="sticky"
-          top="16"
-          pl="16"
-          pr="8"
-          w={{ base: "full", md: "30%" }}
+          top="0"
+          pl="8"
+          pr="4"
+          w={{ base: "full", md: "40%" }}
           h="min-content"
         >
           <Pomodoro />
-        </Box>
-        <Box top="16" pl="8" pr="16" w={{ base: "full", md: "70%" }}>
           <Task />
         </Box>
+        <Box top="0" pl="4" pr="8" w={{ base: "full", md: "60%" }}></Box>
       </Flex>
     </ChakraProvider>
   );
