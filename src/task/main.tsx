@@ -24,51 +24,88 @@ import {
   MdOutlineAvTimer,
   MdMoreHoriz,
 } from "react-icons/md";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { RndBlock } from "../component/RndBlock";
+import { useWindowSize } from "react-use";
 
 export function Task() {
   const [showMemo, setShowMemo] = useState(false);
   const handleShowMemoToggle = () => setShowMemo(!showMemo);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [nowTaskBlockX, setNowTaskBlockX] = useState(0);
+  const [nowTaskBlockY, setNowTaskBlockY] = useState(0);
+  const { width, height } = useWindowSize();
+  useEffect(() => {
+    const nowTaskBox = document.getElementById("nowTaskBox");
+    const nowTaskBlock = document.getElementById("nowTaskBlock");
+    if (nowTaskBox !== null && nowTaskBlock !== null) {
+      nowTaskBox.style.width = nowTaskBlock.offsetWidth + "px";
+      nowTaskBox.style.height = nowTaskBlock.offsetHeight + "px";
+      console.log(nowTaskBox.style.marginLeft);
+      setNowTaskBlockX(
+        parseFloat(window.getComputedStyle(nowTaskBox).marginLeft)
+      );
+      setNowTaskBlockY(0);
+    }
+  }, [width, height]);
   return (
     <>
-      <VStack spacing="4" border="1px" p="4">
-        <VStack align="start">
-          <HStack>
-            <Text>😊</Text>
-            <Text>プロジェクト名</Text>
-          </HStack>
-          <Text>タスク名</Text>
-        </VStack>
-        <Divider color="cyberpunk.3" />
-        <HStack spacing="4">
-          <HStack spacing="1">
-            <Icon as={MdStar} w="8" h="8" />
-            <Icon as={MdStarOutline} w="6" h="6" />
-            <Icon as={MdStarOutline} w="6" h="6" />
-          </HStack>
-          <VStack spacing="0">
+      <Box border="1px" id="nowTaskBox" mx="auto">
+        <RndBlock
+          cancel=".noDragNowTask"
+          bounds="window"
+          id="nowTaskBlock"
+          position={{
+            x: nowTaskBlockX,
+            y: nowTaskBlockY,
+          }}
+          enableResizing={false}
+        >
+          <VStack spacing="4" border="1px" p="4">
+            <VStack align="start" className="noDragNowTask" cursor="default">
+              <HStack>
+                <Text>😊</Text>
+                <Text>プロジェクト名</Text>
+              </HStack>
+              <Text>タスク名</Text>
+            </VStack>
+            <Divider color="cyberpunk.3" />
+            <HStack spacing="4">
+              <HStack spacing="1">
+                <Icon as={MdStar} w="8" h="8" />
+                <Icon as={MdStarOutline} w="6" h="6" />
+                <Icon as={MdStarOutline} w="6" h="6" />
+              </HStack>
+              <VStack spacing="0">
+                <Text fontSize="xl" fontWeight="bold">
+                  あと1週間
+                </Text>
+                <Text>～12/29</Text>
+              </VStack>
+            </HStack>
             <Text fontSize="xl" fontWeight="bold">
-              あと1週間
+              今週はまだやってない
             </Text>
-            <Text>～12/29</Text>
+            <Divider color="cyberpunk.3" />
+            <Flex width="full" className="noDragNowTask" cursor="default">
+              <Icon as={MdLink} w="6" h="6" />
+              <Spacer />
+              <HStack>
+                <Icon as={MdOutlineAvTimer} w="6" h="6" />
+                <Text>25分</Text>
+              </HStack>
+              <Spacer />
+              <Icon
+                as={MdMoreHoriz}
+                w="6"
+                h="6"
+                onClick={onOpen}
+                cursor="pointer"
+              />
+            </Flex>
           </VStack>
-        </HStack>
-        <Text fontSize="xl" fontWeight="bold">
-          今週はまだやってない
-        </Text>
-        <Divider color="cyberpunk.3" />
-        <Flex width="full">
-          <Icon as={MdLink} w="6" h="6" />
-          <Spacer />
-          <HStack>
-            <Icon as={MdOutlineAvTimer} w="6" h="6" />
-            <Text>25分</Text>
-          </HStack>
-          <Spacer />
-          <Icon as={MdMoreHoriz} w="6" h="6" onClick={onOpen} />
-        </Flex>
-      </VStack>
+        </RndBlock>
+      </Box>
       <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent bgColor="cyberpunk.5">

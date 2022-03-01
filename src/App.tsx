@@ -1,14 +1,8 @@
-import {
-  extendTheme,
-  ChakraProvider,
-  Box,
-  Flex,
-  Text,
-  HStack,
-} from "@chakra-ui/react";
+import { extendTheme, ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import { Pomodoro } from "./pomodoro/main";
 import React from "react";
 import { Task } from "./task/main";
+import { Timeline } from "./timeline/main";
 
 const theme = extendTheme({
   colors: {
@@ -46,7 +40,9 @@ function App() {
           <Pomodoro />
           <Task />
         </Box>
-        <Box top="0" pl="4" pr="8" w={{ base: "full", md: "60%" }}></Box>
+        <Box top="0" pl="4" pr="8" w={{ base: "full", md: "60%" }}>
+          <Timeline />
+        </Box>
       </Flex>
     </ChakraProvider>
   );
