@@ -1,5 +1,6 @@
 import { VStack, HStack, Text } from "@chakra-ui/react";
-import React from "react";
+import * as React from "react";
+
 import { RndBlock } from "../component/RndBlock";
 
 export const Timeline: React.VFC = () => {

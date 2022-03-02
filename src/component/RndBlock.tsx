@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import { Rnd, Props } from "react-rnd";
 
-export const RndBlock: React.FC<Props> = ({
+export const RndBlock: FC<Props> = ({
   bounds = "window",
   children,
   ...props

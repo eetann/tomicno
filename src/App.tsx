@@ -1,5 +1,4 @@
 import { extendTheme, ChakraProvider, Box, Flex } from "@chakra-ui/react";
-import React from "react";
 
 import { Pomodoro } from "./pomodoro/main";
 import { Task } from "./task/main";
