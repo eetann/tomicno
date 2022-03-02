@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     "react/jsx-uses-vars": 1,
     "react/jsx-uses-react": 1,
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "import/no-named-as-default-member": "off",
     "unused-imports/no-unused-imports": "error",
