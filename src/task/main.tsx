@@ -17,6 +17,7 @@ import {
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import {
   MdStarOutline,
   MdStar,
@@ -24,9 +25,9 @@ import {
   MdOutlineAvTimer,
   MdMoreHoriz,
 } from "react-icons/md";
-import React, { useEffect, useState } from "react";
-import { RndBlock } from "../component/RndBlock";
 import { useWindowSize } from "react-use";
+
+import { RndBlock } from "../component/RndBlock";
 
 export function Task() {
   const [showMemo, setShowMemo] = useState(false);

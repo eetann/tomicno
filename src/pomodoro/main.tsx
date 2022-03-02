@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import React, { useState } from "react";
 dayjs.extend(duration);
 import Push from "push.js";
-
 import {
   Button,
   CircularProgress,
@@ -12,6 +11,7 @@ import {
   Text,
   HStack,
 } from "@chakra-ui/react";
+
 import useInterval from "./useInterval";
 
 const ONE_MINUTE = 1;
