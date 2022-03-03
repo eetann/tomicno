@@ -1,4 +1,4 @@
-import { VStack, HStack, Text } from "@chakra-ui/react";
+import { HStack, Text, VStack } from "@chakra-ui/react";
 import * as React from "react";
 
 import { RndBlock } from "../component/RndBlock";

@@ -1,29 +1,29 @@
 import {
   Box,
-  VStack,
   Button,
   Collapse,
-  Flex,
-  Spacer,
-  HStack,
-  Text,
-  Icon,
   Divider,
-  useDisclosure,
+  Flex,
+  HStack,
+  Icon,
   Modal,
-  ModalOverlay,
+  ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  ModalBody,
+  ModalOverlay,
+  Spacer,
+  Text,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import {
-  MdStarOutline,
-  MdStar,
   MdLink,
-  MdOutlineAvTimer,
   MdMoreHoriz,
+  MdOutlineAvTimer,
+  MdStar,
+  MdStarOutline,
 } from "react-icons/md";
 import { useWindowSize } from "react-use";
 
