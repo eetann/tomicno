@@ -29,6 +29,36 @@ import { useWindowSize } from "react-use";
 
 import { RndBlock } from "../component/RndBlock";
 
+type TaskHistoryType = {
+  id: string;
+  // TODO: dayjsへ
+  date: string;
+};
+
+type TaskHistoryViewType = {
+  id: string;
+  blockTime: string;
+  date: string;
+  relativeTime: string;
+  period: string;
+};
+
+type taskViewType = {
+  id: string;
+  title: string;
+  projectEmoji: string;
+  project: string;
+  period: string;
+  relativePeriod: string;
+  reminder: string[];
+  importance: 1 | 2 | 3;
+  blockTime: number;
+  url: string;
+  memo: string;
+  frequency: string;
+  history: TaskHistoryViewType[];
+};
+
 export function Task() {
   const [showMemo, setShowMemo] = useState(false);
   const handleShowMemoToggle = () => setShowMemo(!showMemo);
